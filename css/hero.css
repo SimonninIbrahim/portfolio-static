@@ -1,0 +1,424 @@
+/* ===============================
+   HERO SECTION CONTAINER
+   Controls the main landing section height, background image behavior,
+   rounded bottom edges, depth shadow, and overall hero positioning.
+================================ */
+.hero{
+    height:104vh;
+    position:relative;
+    z-index:10;
+
+    background-position:center 60%;
+    background-size:120%;
+    background-repeat:no-repeat;
+
+    display:flex;
+    align-items:center;
+    padding:0 8%;
+
+    border-bottom-left-radius:80px;
+    border-bottom-right-radius:80px;
+    overflow:hidden;
+
+    /* --- DEPTH --- */
+    box-shadow:
+        0 40px 80px rgba(0,0,0,0.6),
+        0 15px 40px rgba(0,0,0,0.4),
+        inset 0 -1px 0 rgba(255,255,255,0.05);
+}
+.hero::after{
+    content:"";
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:1px;
+    background:linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
+}
+
+/* ===============================
+   HERO CONTENT LAYOUT
+   Places the name/introduction on the left and the descriptive
+   paragraph on the right using a flexible horizontal layout.
+================================ */
+.hero-content{
+    position:relative;
+    z-index:3;
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:60px;
+}
+
+.hero-left{
+    position:relative;
+}
+
+/* ===============================
+   HERO INTRO TEXT
+   Styles the small “Hey, I'm” line above the name and gives
+   the highlighted word a subtle glowing motion.
+================================ */
+.hero-intro{
+    display:flex;
+    gap:10px;
+
+    margin-bottom:15px;
+
+    font-size:24px;
+    font-weight:500;
+
+    font-family:'Plus Jakarta Sans', sans-serif;
+}
+
+.intro-hey{
+    color:#F5F5F7;
+}
+
+.intro-im{
+    color:#FF6A2B;
+
+    position:relative;
+
+    animation:introGlow 2.5s ease infinite;
+}
+
+@keyframes introGlow{
+
+    0%{
+        opacity:0.6;
+        transform:translateY(0);
+    }
+
+    50%{
+        opacity:1;
+        transform:translateY(-3px);
+        text-shadow:0 0 20px rgba(255,106,43,0.7);
+    }
+
+    100%{
+        opacity:0.6;
+        transform:translateY(0);
+    }
+}
+
+/* ===============================
+   TYPING NAME EFFECT
+   Styles the large hero name and the blinking cursor used by
+   JavaScript to create the one-time typing animation.
+================================ */
+.hero-name{
+    font-size:88px;
+    line-height:1.05;
+    color:#F5F5F7;
+    font-family:'Playfair Display', serif;
+    font-weight:700;
+    min-height:185px;
+}
+
+.typing-cursor{
+    color:#ffe8de;
+    font-weight:300;
+    font-size:0.95em;
+    margin-left:-18px;
+    animation:cursorBlink 0.75s infinite;
+}
+
+@keyframes cursorBlink{
+    50%{
+        opacity:0;
+    }
+}
+
+/* ===============================
+   ROLE TITLE REVEAL
+   Styles the “Computer Scientist” subtitle that appears after
+   the name typing animation finishes.
+================================ */
+.hero-title-role{
+    margin-top:10px;
+    color:#ef7d4c;
+    font-family:'Plus Jakarta Sans', sans-serif;
+    font-size:24px;
+    font-weight:500;
+    letter-spacing:2px;
+
+    opacity:0;
+    transform:translateY(15px);
+    transition:0.55s ease;
+}
+
+.hero-title-role.visible{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* ===============================
+   HERO DESCRIPTION
+   Styles the long introduction paragraph on the right side,
+   including justified text and its slide-in reveal animation.
+================================ */
+.hero-right{
+    max-width:340px;
+    font-family:'Plus Jakarta Sans', sans-serif;
+    color:#efefef;
+    line-height:1.8;
+    margin-top:50px;
+
+    text-align:justify;
+    text-justify:inter-word;
+
+    opacity:0;
+    transform:translateX(35px);
+    transition:0.8s ease;
+
+    hyphens:auto;
+    word-break:normal;
+
+    letter-spacing:0.2px;
+    text-align-last:justify;
+}
+
+.hero-right.visible{
+    opacity:1;
+    transform:translateX(0);
+}
+
+.hero-right::after{
+    content:"";
+    display:inline-block;
+    width:100%;
+}
+
+/* ===============================
+   HERO QUICK INFO CARDS
+   Positions and styles the compact personal information cards
+   shown below the name, including icons, labels, values, and hover state.
+================================ */
+.hero-quick-info{
+    position:absolute;
+    top:330px;
+    left:0;
+
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+}
+
+.quick-info-item{
+    min-width:260px;
+    height:58px;
+
+    display:grid;
+    grid-template-columns:34px auto;
+    column-gap:12px;
+    row-gap:2px;
+    align-items:center;
+
+    padding:0 18px;
+
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,0.1);
+
+    color:#F5F5F7;
+
+    box-shadow:0 18px 40px rgba(0,0,0,0.28);
+
+    opacity:0;
+    transform:translateY(28px);
+    transition:
+        opacity 0.55s ease,
+        transform 0.55s ease,
+        background 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.quick-info-item i{
+    grid-row:1 / 3;
+    color:#f58e61;
+    font-size:19px;
+}
+
+.quick-info-item span{
+    font-family:'Plus Jakarta Sans', sans-serif;
+    font-size:11px;
+    color:#B8B8BE;
+    text-transform:uppercase;
+    letter-spacing:1.2px;
+    line-height:1;
+}
+
+.quick-info-item strong{
+    font-family:'Plus Jakarta Sans', sans-serif;
+    font-size:14px;
+    font-weight:500;
+    color:#F5F5F7;
+    line-height:1.1;
+}
+
+.quick-info-item.visible{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.quick-info-item:hover{
+    background:rgba(255,106,43,0.13);
+    border-color:rgba(255,106,43,0.45);
+}
+
+.quick-info-item span{
+    margin-bottom:-4px;
+}
+
+.hero-cv-btn{
+    margin-top:22px;
+    padding:13px 22px;
+    border:none;
+    border-radius:999px;
+
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+
+    background:linear-gradient(135deg,#FF7A18,#FF4D00);
+    color:#0E0E10;
+
+    font-family:'Plus Jakarta Sans', sans-serif;
+    font-weight:800;
+    letter-spacing:1px;
+    text-transform:uppercase;
+
+    cursor:pointer;
+    box-shadow:0 18px 45px rgba(255,77,0,0.35);
+    transition:0.3s;
+}
+
+.hero-cv-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 26px 65px rgba(255,77,0,0.50);
+}
+
+.cv-popup-overlay{
+    position:fixed;
+    inset:0;
+    z-index:9999999;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:rgba(0,0,0,0.82);
+    backdrop-filter:blur(10px);
+
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transition:0.35s;
+}
+
+.cv-popup-overlay.active{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+}
+
+.cv-popup-box{
+    position:relative;
+    width:min(900px,92vw);
+    height:min(760px,88vh);
+
+    padding:26px;
+    border-radius:28px;
+
+    background:#18181B;
+    border:1px solid rgba(255,255,255,0.1);
+
+    box-shadow:
+        0 45px 130px rgba(0,0,0,0.75),
+        0 0 55px rgba(255,106,43,0.18);
+
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.cv-popup-box h2{
+    font-family:'Playfair Display', serif;
+    color:#F5F5F7;
+    font-size:30px;
+}
+
+.cv-popup-close{
+    position:absolute;
+    top:18px;
+    right:18px;
+
+    width:40px;
+    height:40px;
+    border:none;
+    border-radius:50%;
+
+    background:rgba(255,255,255,0.08);
+    color:#F5F5F7;
+
+    cursor:pointer;
+}
+
+.cv-frame{
+    width:100%;
+    flex:1;
+    border:none;
+    border-radius:18px;
+    background:#F5F5F7;
+}
+
+.cv-download-btn{
+    align-self:center;
+
+    padding:12px 20px;
+    border-radius:999px;
+
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+
+    background:linear-gradient(135deg,#FF7A18,#FF4D00);
+    color:#0E0E10;
+    text-decoration:none;
+
+    font-family:'Plus Jakarta Sans', sans-serif;
+    font-weight:800;
+    text-transform:uppercase;
+}
+
+.hero-cv-btn{
+    flex-basis:100%;
+    width:max-content;
+    flex:0 0 auto;
+    order:4;
+    margin-top:6px;
+    margin-left:0;
+    opacity:0;
+    transform:translateY(28px);
+    transition:
+        opacity 0.55s ease,
+        transform 0.55s ease,
+        box-shadow 0.3s ease;
+}
+
+.hero-cv-btn.visible{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.hero-quick-info::after{
+    content:"";
+    flex-basis:100%;
+    order:3;
+}
+
+.hero-cv-btn{
+    order:4;
+}
