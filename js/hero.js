@@ -64,22 +64,10 @@
     }
 
 /* Starts the hero animation after the page and loading screen finish */
-    document.addEventListener("DOMContentLoaded", () => {
-        const enterBtn = document.getElementById("enter-portfolio-btn");
-        const welcomeGate = document.getElementById("welcome-gate");
-
-        if(enterBtn && welcomeGate){
-            enterBtn.addEventListener("click", () => {
-                welcomeGate.classList.add("hidden");
-                welcomeGate.classList.remove("active");
-
-                setTimeout(() => {
-                    typeName();
-                }, 450);
-            });
-        }else{
+    window.addEventListener("portfolioReady", () => {
+        setTimeout(() => {
             typeName();
-        }
+        }, 250);
     });
 
 
